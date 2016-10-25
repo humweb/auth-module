@@ -2,8 +2,9 @@
 
 namespace Humweb\Auth\Controllers;
 
-use App\Http\Controllers\Controller;
+
 use Carbon\Carbon;
+use Humweb\Core\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 

@@ -4,8 +4,8 @@ namespace Humweb\Auth\Controllers;
 
 use Humweb\Auth\Groups\Group;
 use Humweb\Auth\Requests\GroupSaveRequest;
-use App\Http\Controllers\AdminController;
 use Humweb\Auth\Permissions\PermissionsPresenter;
+use Humweb\Core\Http\Controllers\AdminController;
 
 class GroupsController extends AdminController
 {

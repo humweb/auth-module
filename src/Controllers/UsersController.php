@@ -4,7 +4,7 @@ namespace Humweb\Auth\Controllers;
 
 use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\UserSaveRequest;
-use App\Http\Controllers\AdminController;
+use Humweb\Core\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Redirect;
 use Humweb\Auth\Groups\Group;
 use Humweb\Auth\Users\User;

@@ -2,7 +2,7 @@
 
 namespace Humweb\Auth\Controllers;
 
-use App\Http\Controllers\Controller;
+use Humweb\Core\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Http\Request;
