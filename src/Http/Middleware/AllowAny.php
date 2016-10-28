@@ -1,6 +1,6 @@
 <?php
 
-namespace Humweb\Core\Http\Middleware;
+namespace Humweb\Auth\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
