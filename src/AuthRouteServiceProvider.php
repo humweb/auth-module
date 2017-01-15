@@ -25,7 +25,7 @@ class AuthRouteServiceProvider extends RouteServiceProvider
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function ($router) {
+        $router->group(['namespace' => $this->namespace, 'middleware' => 'web'], function ($router) {
             require __DIR__.'/routes.php';
         });
     }

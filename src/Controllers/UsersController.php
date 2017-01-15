@@ -163,7 +163,7 @@ class UsersController extends AdminController
      */
     protected function showForm($mode, $id = null)
     {
-        $groups      = $this->groups->select('id', 'name')->lists('name');
+        $groups      = $this->groups->select('id', 'name')->pluck('name', 'id');
         $permissions = $this->permissions->getPermissions();
 
         if ($id) {
