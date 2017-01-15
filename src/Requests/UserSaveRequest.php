@@ -2,9 +2,9 @@
 
 namespace Humweb\Auth\Requests;
 
-use Humweb\Http\Requests\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UserSaveRequest extends Request
+class UserSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
