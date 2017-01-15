@@ -29,17 +29,6 @@ class Group extends Model implements PermissibleContract
 
 
     /**
-     * Returns the relationship between groups and users.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function users()
-    {
-        return $this->belongsToMany('Humweb\Auth\Users\User', 'user_groups');
-    }
-
-
-    /**
      * Delete the group.
      *
      * @return bool
@@ -49,5 +38,16 @@ class Group extends Model implements PermissibleContract
         $this->users()->detach();
 
         return parent::delete();
+    }
+
+
+    /**
+     * Returns the relationship between groups and users.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany('Humweb\Auth\Users\User', 'user_groups');
     }
 }

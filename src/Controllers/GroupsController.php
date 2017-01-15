@@ -3,8 +3,8 @@
 namespace Humweb\Auth\Controllers;
 
 use Humweb\Auth\Groups\Group;
-use Humweb\Auth\Requests\GroupSaveRequest;
 use Humweb\Auth\Permissions\PermissionsPresenter;
+use Humweb\Auth\Requests\GroupSaveRequest;
 use Humweb\Core\Http\Controllers\AdminController;
 
 class GroupsController extends AdminController
@@ -69,6 +69,30 @@ class GroupsController extends AdminController
 
 
     /**
+     * Shows the form.
+     *
+     * @param string $mode
+     * @param int    $id
+     *
+     * @return mixed
+     */
+    protected function showForm($mode, $id = null)
+    {
+        $permissions = $this->permissions->getPermissions();
+
+        if ($id) {
+            if ( ! $group = $this->groups->find($id)) {
+                return redirect()->route('get.groups');
+            }
+        } else {
+            $group = $this->groups;
+        }
+
+        return $this->setContent('auth::groups.form', compact('mode', 'group', 'permissions'));
+    }
+
+
+    /**
      * Handle posting of the form for creating new group.
      *
      * @return \Illuminate\Http\RedirectResponse
@@ -128,29 +152,5 @@ class GroupsController extends AdminController
         }
 
         return redirect()->route('get.groups');
-    }
-
-
-    /**
-     * Shows the form.
-     *
-     * @param string $mode
-     * @param int    $id
-     *
-     * @return mixed
-     */
-    protected function showForm($mode, $id = null)
-    {
-        $permissions = $this->permissions->getPermissions();
-
-        if ($id) {
-            if ( ! $group = $this->groups->find($id)) {
-                return redirect()->route('get.groups');
-            }
-        } else {
-            $group = $this->groups;
-        }
-
-        return $this->setContent('auth::groups.form', compact('mode', 'group', 'permissions'));
     }
 }

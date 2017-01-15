@@ -30,12 +30,13 @@
                                 <tr>
                                     <td class="col-sm-4"><span data-toggle="tooltip" title="{{ $meta['description'] }}">{{ $meta['name'] }}</span></td>
                                     <td class="col-sm-8">
-                                    <?php $_hasGroup = isset($entity->permissions[$perm]) && $entity->permissions[$perm] ? true : false; ?>
-                                    <?php $_isDenied = (! isset($entity->permissions[$perm]) || isset($entity->permissions[$perm]) && $entity->permissions[$perm] == true) ? false : true; ?>
-                                    <label class="radio-inline"><input type="radio" name="permissions[{{ $perm }}]" value="1" {{ $_hasGroup ? 'checked': '' }}/>
-                                        Allow</label>
-                                    <label class="radio-inline"><input type="radio" name="permissions[{{ $perm }}]" value="0"  {{ $_isDenied ? 'checked': '' }}/>
-                                        Deny</label>
+                                        <?php $_hasGroup = isset($entity->permissions[$perm]) && $entity->permissions[$perm] ? true : false; ?>
+                                        <?php $_isDenied = ( ! isset($entity->permissions[$perm]) || isset($entity->permissions[$perm]) && $entity->permissions[$perm] == true)
+                                            ? false : true; ?>
+                                        <label class="radio-inline"><input type="radio" name="permissions[{{ $perm }}]" value="1" {{ $_hasGroup ? 'checked': '' }}/>
+                                            Allow</label>
+                                        <label class="radio-inline"><input type="radio" name="permissions[{{ $perm }}]" value="0" {{ $_isDenied ? 'checked': '' }}/>
+                                            Deny</label>
                                     </td>
                                 </tr>
                             @endforeach
@@ -48,18 +49,18 @@
     </div>
 
     <script>
-        $(function(){
-            var toggleChevron = function(e) {
+        $(function () {
+            var toggleChevron = function (e) {
 
                 $(e.target)
-                        .prev('.panel-heading')
-                        .find("i.indicator")
-                        .toggleClass('fa-chevron-down fa-chevron-right');
+                    .prev('.panel-heading')
+                    .find("i.indicator")
+                    .toggleClass('fa-chevron-down fa-chevron-right');
             };
 
             $('#accordion')
-                    .on('hide.bs.collapse', toggleChevron)
-                    .on('show.bs.collapse', toggleChevron);
+                .on('hide.bs.collapse', toggleChevron)
+                .on('show.bs.collapse', toggleChevron);
         })
     </script>
 @endif

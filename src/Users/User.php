@@ -6,8 +6,8 @@ use Humweb\Auth\Contracts\Permissible as PemissibleContract;
 use Humweb\Auth\Groups\Contracts\Groupable as GroupableContract;
 use Humweb\Auth\Groups\Groupable;
 use Humweb\Auth\Permissions\Permissible;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class User
@@ -46,6 +46,7 @@ class User extends Authenticatable implements PemissibleContract, GroupableContr
     protected $attributes = [
         'permissions' => []
     ];
+
 
     public function getFullName()
     {

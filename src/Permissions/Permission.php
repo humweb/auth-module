@@ -62,6 +62,36 @@ class Permission
 
 
     /**
+     * Check if entity has any permissions property.
+     *
+     * @param $entity
+     *
+     * @return bool
+     */
+    protected function entityHasPermissions($entity)
+    {
+        return isset($entity->permissions) && is_array($entity->permissions);
+    }
+
+
+    /**
+     * Internal boolean check.
+     *
+     * @param $val
+     *
+     * @return bool
+     */
+    protected function isTrue($val)
+    {
+        if ($val === 1 || $val === '1' || $val === true || $val === 'true') {
+            return true;
+        }
+
+        return false;
+    }
+
+
+    /**
      * Create Permission instance from permissible entities.
      *
      * @param      $entities
@@ -72,6 +102,19 @@ class Permission
     public static function fromPermissible($entities, $overrideEntities = null)
     {
         return new static($entities, $overrideEntities);
+    }
+
+
+    /**
+     * Check Permissions (non-strict).
+     *
+     * @param $perm
+     *
+     * @return bool
+     */
+    public function hasAnyPermission($perm)
+    {
+        return $this->hasPermission($perm, false);
     }
 
 
@@ -108,15 +151,42 @@ class Permission
 
 
     /**
-     * Check Permissions (non-strict).
+     * Check for matching permissions.
      *
-     * @param $perm
+     * @param $p
      *
      * @return bool
      */
-    public function hasAnyPermission($perm)
+    protected function hasMatchingPermission($p)
     {
-        return $this->hasPermission($perm, false);
+        if (ends_with($p, '*')) {
+            $hasPermission = $this->matchWildcardPermission($p);
+
+            return $hasPermission;
+        } else {
+            $hasPermission = in_array($p, $this->allocatedPermissions);
+
+            return $hasPermission;
+        }
+    }
+
+
+    /**
+     * Match wildcard permissions.
+     *
+     * @param $permission
+     *
+     * @return bool
+     */
+    protected function matchWildcardPermission($permission)
+    {
+        foreach ($this->allocatedPermissions as $mergedPermission) {
+            if (str_is($permission, $mergedPermission)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 
@@ -143,38 +213,6 @@ class Permission
 
 
     /**
-     * Match wildcard permissions.
-     *
-     * @param $permission
-     *
-     * @return bool
-     */
-    protected function matchWildcardPermission($permission)
-    {
-        foreach ($this->allocatedPermissions as $mergedPermission) {
-            if (str_is($permission, $mergedPermission)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-
-    /**
-     * Check if entity has any permissions property.
-     *
-     * @param $entity
-     *
-     * @return bool
-     */
-    protected function entityHasPermissions($entity)
-    {
-        return isset($entity->permissions) && is_array($entity->permissions);
-    }
-
-
-    /**
      * Check if processed and true.
      *
      * @param $perm
@@ -197,43 +235,5 @@ class Permission
     protected function isCachedAndFalse($perm)
     {
         return isset($this->mergedPermissions[$perm]) && ! $this->isTrue($this->mergedPermissions[$perm]);
-    }
-
-
-    /**
-     * Internal boolean check.
-     *
-     * @param $val
-     *
-     * @return bool
-     */
-    protected function isTrue($val)
-    {
-        if ($val === 1 || $val === '1' || $val === true || $val === 'true') {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    /**
-     * Check for matching permissions.
-     *
-     * @param $p
-     *
-     * @return bool
-     */
-    protected function hasMatchingPermission($p)
-    {
-        if (ends_with($p, '*')) {
-            $hasPermission = $this->matchWildcardPermission($p);
-
-            return $hasPermission;
-        } else {
-            $hasPermission = in_array($p, $this->allocatedPermissions);
-
-            return $hasPermission;
-        }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace Humweb\Auth;
 
-use Illuminate\Routing\Router;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider;
+use Illuminate\Routing\Router;
 
 class AuthRouteServiceProvider extends RouteServiceProvider
 {
@@ -15,7 +15,6 @@ class AuthRouteServiceProvider extends RouteServiceProvider
      * @var string
      */
     protected $namespace = 'Humweb\Auth\Controllers';
-
 
 
     /**

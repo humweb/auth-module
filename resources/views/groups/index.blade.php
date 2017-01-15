@@ -5,7 +5,7 @@
             <span class="pull-right"><a href="{{ route('get.groups.create') }}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a></span>
             <h4>Groups </h4>
         </div>
-            @if ($groups->count())
+        @if ($groups->count())
             <div class="panel-body">
 
                 <table class="table table-striped">
@@ -36,9 +36,9 @@
             </div>
         @else
             <div class="panel-body">
-            <div class="well">
-                Nothing to show here.
-            </div>
+                <div class="well">
+                    Nothing to show here.
+                </div>
             </div>
         @endif
     </div>

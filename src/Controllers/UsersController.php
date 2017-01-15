@@ -2,12 +2,12 @@
 
 namespace Humweb\Auth\Controllers;
 
+use Humweb\Auth\Groups\Group;
 use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\UserSaveRequest;
+use Humweb\Auth\Users\User;
 use Humweb\Core\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Redirect;
-use Humweb\Auth\Groups\Group;
-use Humweb\Auth\Users\User;
 
 class UsersController extends AdminController
 {
@@ -64,6 +64,31 @@ class UsersController extends AdminController
     public function getCreate()
     {
         return $this->showForm('create');
+    }
+
+
+    /**
+     * Shows the form.
+     *
+     * @param string $mode
+     * @param int    $id
+     *
+     * @return mixed
+     */
+    protected function showForm($mode, $id = null)
+    {
+        $groups      = $this->groups->select('id', 'name')->pluck('name', 'id');
+        $permissions = $this->permissions->getPermissions();
+
+        if ($id) {
+            if ( ! $user = $this->users->find($id)) {
+                return Redirect::to('users');
+            }
+        } else {
+            $user = $this->users;
+        }
+
+        return $this->setContent('auth::users.form', compact('mode', 'user', 'groups', 'permissions'));
     }
 
 
@@ -150,30 +175,5 @@ class UsersController extends AdminController
         }
 
         return Redirect::to('users');
-    }
-
-
-    /**
-     * Shows the form.
-     *
-     * @param string $mode
-     * @param int    $id
-     *
-     * @return mixed
-     */
-    protected function showForm($mode, $id = null)
-    {
-        $groups      = $this->groups->select('id', 'name')->pluck('name', 'id');
-        $permissions = $this->permissions->getPermissions();
-
-        if ($id) {
-            if ( ! $user = $this->users->find($id)) {
-                return Redirect::to('users');
-            }
-        } else {
-            $user = $this->users;
-        }
-
-        return $this->setContent('auth::users.form', compact('mode', 'user', 'groups', 'permissions'));
     }
 }

@@ -2,11 +2,10 @@
 
 namespace Humweb\Auth\Controllers;
 
-
 use Carbon\Carbon;
 use Humweb\Core\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -33,7 +32,7 @@ class AuthController extends Controller
      */
     public function __construct(Guard $auth)
     {
-        $this->auth      = $auth;
+        $this->auth = $auth;
 
         $this->middleware('guest', ['except' => 'getLogout']);
     }
@@ -68,6 +67,21 @@ class AuthController extends Controller
         $this->auth->login($this->registrar->create($request->all()));
 
         return redirect($this->redirectPath());
+    }
+
+
+    /**
+     * Get the post register / login redirect path.
+     *
+     * @return string
+     */
+    public function redirectPath()
+    {
+        if (property_exists($this, 'redirectPath')) {
+            return $this->redirectPath;
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
 
 
@@ -109,8 +123,19 @@ class AuthController extends Controller
         }
 
         return redirect($this->loginPath())->withInput($request->only('email', 'remember'))->withErrors([
-                'email' => $this->getFailedLoginMessage(),
-            ]);
+            'email' => $this->getFailedLoginMessage(),
+        ]);
+    }
+
+
+    /**
+     * Get the path to the login route.
+     *
+     * @return string
+     */
+    public function loginPath()
+    {
+        return property_exists($this, 'loginPath') ? $this->loginPath : route('get.login');
     }
 
 
@@ -136,31 +161,5 @@ class AuthController extends Controller
         $url = property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/';
 
         return redirect($url);
-    }
-
-
-    /**
-     * Get the post register / login redirect path.
-     *
-     * @return string
-     */
-    public function redirectPath()
-    {
-        if (property_exists($this, 'redirectPath')) {
-            return $this->redirectPath;
-        }
-
-        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
-    }
-
-
-    /**
-     * Get the path to the login route.
-     *
-     * @return string
-     */
-    public function loginPath()
-    {
-        return property_exists($this, 'loginPath') ? $this->loginPath : route('get.login');
     }
 }
