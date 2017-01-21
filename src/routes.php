@@ -22,7 +22,7 @@
 /*
  * ADMIN - GROUPS
  */
-Route::group(['prefix' => 'groups'], function () {
+Route::group(['prefix' => 'admin/groups'], function () {
 
     //---# INDEX
     Route::get('/', [
@@ -72,7 +72,7 @@ Route::group(['prefix' => 'groups'], function () {
 /*
  * ADMIN - USERS
  */
-Route::group(['prefix' => 'users'], function () {
+Route::group(['prefix' => 'admin/users'], function () {
 
     //---# INDEX
     Route::get('/', [
