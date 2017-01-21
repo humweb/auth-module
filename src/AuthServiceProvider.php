@@ -69,8 +69,16 @@ class AuthServiceProvider extends ModuleBaseProvider
     {
         return [
             'Users' => [
-                ['label' => 'Groups', 'url' => route('get.groups')],
-                ['label' => 'Users', 'url' => route('get.users')],
+                [
+                    'label' => 'Groups',
+                    'url'   => route('get.groups'),
+                    'icon'  => '<i class="fa fa-users" ></i>',
+                ],
+                [
+                    'label' => 'Users',
+                    'url'   => route('get.users'),
+                    'icon'  => '<i class="fa fa-user" ></i>',
+                ],
             ],
         ];
     }
