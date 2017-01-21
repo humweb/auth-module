@@ -28,6 +28,10 @@ class UsersController extends AdminController
 
     /**
      * Constructor.
+     *
+     * @param \Humweb\Auth\Users\User                       $user
+     * @param \Humweb\Auth\Groups\Group                     $group
+     * @param \Humweb\Auth\Permissions\PermissionsPresenter $permissions
      */
     public function __construct(User $user, Group $group, PermissionsPresenter $permissions)
     {
@@ -80,10 +84,8 @@ class UsersController extends AdminController
         $groups      = $this->groups->select('id', 'name')->pluck('name', 'id');
         $permissions = $this->permissions->getPermissions();
 
-        if ($id) {
-            if ( ! $user = $this->users->find($id)) {
-                return Redirect::to('users');
-            }
+        if ($id && ! ($user = $this->users->find($id))) {
+            return redirect()->route('get.users')->with('error', 'User not found.');
         } else {
             $user = $this->users;
         }
@@ -95,28 +97,31 @@ class UsersController extends AdminController
     /**
      * Handle posting of the form for creating new user.
      *
+     * @param \Humweb\Auth\Requests\UserSaveRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse
      */
     public function postCreate(UserSaveRequest $request)
     {
-        $input = $request->except('_token');
+        $input = $request->except(['_token', 'groups']);
         $user  = $this->users->create($input);
 
-        //Ensure we don't save blank password
+        // Ensure we don't save blank password
         if (isset($input['password']) && empty($input['password'])) {
             unset($input['password']);
         }
 
-        // Sync Roles
-        if (isset($input['groups'])) {
-            $user->groups()->sync($input['groups']);
-            unset($input['groups']);
+        // Sync user groups
+        if ($request->exists('groups')) {
+            $user->groups()->sync($request->get('groups'));
         }
 
         $code = Activation::create($user);
+
+        // Activate user
         Activation::complete($user, $code);
 
-        return redirect('get.users')->with('success', 'User has been saved.');
+        return redirect('get.users')->with('success', 'User has been created.');
     }
 
 
@@ -143,19 +148,18 @@ class UsersController extends AdminController
      */
     public function postEdit(UserSaveRequest $request, $id)
     {
-        $input = $request->except('_token');
+        $input = $request->except(['_token', 'groups']);
 
         $user = $this->users->find($id);
 
-        // Sync Roles
-        if (isset($input['groups'])) {
-            $user->groups()->sync((array)$input['groups']);
-            unset($input['groups']);
+        // Sync user groups
+        if ($request->exists('groups')) {
+            $user->groups()->sync($request->get('groups'));
         }
 
         $user->fill($input)->save();
 
-        return redirect()->route('get.users');
+        return redirect()->route('get.users')->with('success', 'User has been saved.');
     }
 
 
@@ -171,9 +175,9 @@ class UsersController extends AdminController
         if ($user = $this->users->find($id)) {
             $user->delete();
 
-            return Redirect::to('users');
+            return redirect()->route('get.users')->with('info', 'User deleted.');
         }
 
-        return Redirect::to('users');
+        return redirect()->route('get.users')->with('warning', 'User not deleted.');
     }
 }
