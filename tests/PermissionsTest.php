@@ -3,7 +3,6 @@
 namespace Humweb\Tests\Auth;
 
 use Humweb\Auth\Permissions\Permission;
-use PHPUnit\Framework\TestCase;
 
 class PermissionsTest extends TestCase
 {
