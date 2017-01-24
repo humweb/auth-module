@@ -7,7 +7,6 @@ use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\UserSaveRequest;
 use Humweb\Auth\Users\User;
 use Humweb\Core\Http\Controllers\AdminController;
-use Illuminate\Support\Facades\Redirect;
 
 class UsersController extends AdminController
 {
