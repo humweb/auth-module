@@ -7,6 +7,7 @@ use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\UserSaveRequest;
 use Humweb\Auth\Users\User;
 use Humweb\Core\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends AdminController
 {
@@ -102,7 +103,7 @@ class UsersController extends AdminController
      */
     public function postCreate(UserSaveRequest $request)
     {
-        $input = $request->except(['_token', 'groups']);
+        $input = $request->except(['_token', 'groups'])->all();
 
         $input['password'] = Hash::make($input['password']);
 
