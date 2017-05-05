@@ -103,11 +103,11 @@ class UsersController extends AdminController
      */
     public function postCreate(UserSaveRequest $request)
     {
-        $input = $request->except(['_token', 'groups'])->all();
+        $input = $request->except(['_token', 'groups']);
 
-        $input['password'] = Hash::make($input['password']);
-
-        $user = User::create($input);
+        $input['password']    = Hash::make($input['password']);
+        $input['permissions'] = isset($input['permissions']) && is_array($input['permissions']) ? $input['permissions'] : [];
+        $user                 = User::create($input);
 
         // Ensure we don't save blank password
         if (isset($input['password']) && empty($input['password'])) {
@@ -119,7 +119,7 @@ class UsersController extends AdminController
             $user->groups()->sync($request->get('groups'));
         }
 
-        return redirect('get.users')->with('success', 'User has been created.');
+        return redirect()->route('get.users')->with('success', 'User has been created.');
     }
 
 
