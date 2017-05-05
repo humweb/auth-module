@@ -118,11 +118,6 @@ class UsersController extends AdminController
             $user->groups()->sync($request->get('groups'));
         }
 
-        $code = Activation::create($user);
-
-        // Activate user
-        Activation::complete($user, $code);
-
         return redirect('get.users')->with('success', 'User has been created.');
     }
 
