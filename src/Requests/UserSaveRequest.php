@@ -28,10 +28,12 @@ class UserSaveRequest extends FormRequest
             'first_name' => 'required',
             'last_name'  => 'required',
             'email'      => 'required|email|unique:users',
+            'password'   => 'required',
         ];
 
         if ($this->id) {
             $rules['email'] .= ',email,'.$this->id;
+            unset($rules['password']);
         }
 
         return $rules;

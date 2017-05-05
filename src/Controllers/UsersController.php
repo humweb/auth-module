@@ -103,7 +103,10 @@ class UsersController extends AdminController
     public function postCreate(UserSaveRequest $request)
     {
         $input = $request->except(['_token', 'groups']);
-        $user  = $this->users->create($input);
+
+        $input['password'] = Hash::make($input['password']);
+
+        $user = User::create($input);
 
         // Ensure we don't save blank password
         if (isset($input['password']) && empty($input['password'])) {
