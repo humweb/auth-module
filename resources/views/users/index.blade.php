@@ -1,24 +1,25 @@
 {{-- Page content --}}
 @section('content')
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card card-default">
+        <div class="card-header">
             <div class="row">
                 <div class="col-sm-6"><h4>Users</h4></div>
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('get.users.create') }}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a>
+                    <a href="{{ route('get.users.create') }}" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i></a>
                 </div>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             @if ($users->count())
                 <table class="table table-striped">
                     <thead>
-                    <th class="col-lg-2">Email</th>
-                    <th class="col-lg-2">First name</th>
-                    <th class="col-lg-3">Last name</th>
-                    <th class="col-lg-2">Updated</th>
-                    <th class="col-lg-2">Last Login</th>
-                    <th class="col-lg-2"></th>
+                    <tr>
+                        <th>Email</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Updated</th>
+                        <th colspan="2">Last Login</th>
+                    </tr>
                     </thead>
                     <tbody>
                     @foreach ($users as $user)
@@ -29,15 +30,17 @@
                             <td>{{ $user->updated_at }}</td>
                             <td>{{ $user->last_login ? (new Carbon\Carbon($user->last_login))->diffForHumans() : '' }}</td>
                             <td class="text-right">
-                                <a class="btn btn-sm btn-default" href="{{ route("get.users.edit", [$user->id]) }}"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('get.users.delete', [$user->id]) }}"><i class="fa fa-trash"></i></a>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-secondary" href="{{ route("get.users.edit", [$user->id]) }}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-sm btn-danger" href="{{ route('get.users.delete', [$user->id]) }}"><i class="fa fa-trash"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
         </div>
-        <div class="panel-footer">
+        <div class="card-footer">
             Page {{ $users->currentPage() }} of {{ $users->lastPage() }}
 
             <div class="pull-right">
@@ -45,7 +48,7 @@
             </div>
         </div>
         @else
-            <div class="panel-body">
+            <div class="card-body">
                 Nothing to show here.
             </div>
         @endif

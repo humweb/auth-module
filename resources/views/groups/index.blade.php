@@ -1,18 +1,19 @@
 @section('content')
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="pull-right"><a href="{{ route('get.groups.create') }}" class="btn btn-sm btn-default"><i class="fa fa-plus"></i></a></span>
+    <div class="card card-default">
+        <div class="card-header">
+            <span class="pull-right"><a href="{{ route('get.groups.create') }}" class="btn btn-sm btn-secondary"><i class="fa fa-plus"></i></a></span>
             <h4>Groups </h4>
         </div>
         @if ($groups->count())
-            <div class="panel-body">
+            <div class="card-body">
 
                 <table class="table table-striped">
                     <thead>
-                    <th class="col-lg-6">Name</th>
-                    <th class="col-lg-4">Slugs</th>
-                    <th class="col-lg-2"></th>
+                    <tr>
+                        <th>Name</th>
+                        <th colspan="2">Slug</th>
+                    </tr>
                     </thead>
                     <tbody>
                     @foreach ($groups as $group)
@@ -20,23 +21,25 @@
                             <td>{{ $group->name }}</td>
                             <td>{{ $group->slug }}</td>
                             <td class="text-right">
-                                <a class="btn btn-sm btn-default" href="{{ route('get.groups.edit', [$group->id]) }}"><i class="fa fa-edit"></i></a>
-                                <a class="btn btn-sm btn-danger" href="{{ route('get.groups.delete', [$group->id]) }}"><i class="fa fa-trash"></i></a>
+                                <div class="btn-group">
+                                    <a class="btn btn-sm btn-secondary" href="{{ route('get.groups.edit', [$group->id]) }}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-sm btn-danger" href="{{ route('get.groups.delete', [$group->id]) }}"><i class="fa fa-trash"></i></a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
                 Page {{ $groups->currentPage() }} of {{ $groups->lastPage() }}
                 <div class="pull-right">
                     {{ $groups->render() }}
                 </div>
             </div>
         @else
-            <div class="panel-body">
-                <div class="well">
+            <div class="card-body">
+                <div class="text-muted">
                     Nothing to show here.
                 </div>
             </div>

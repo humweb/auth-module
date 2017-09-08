@@ -3,20 +3,20 @@
 
     @if ($mode == 'create')
         {!! Form::open(['route' => 'post.users.create', 'method' => 'post']) !!}
-        <div class="panel panel-default">
-            <div class="panel-heading">
+        <div class="card card-default">
+            <div class="card-header">
                 <div class="row">
                     <div class="col-sm-6"><h4>Create User</h4></div>
                     <div class="col-sm-6 text-right">
-                        <button type="submit" class="btn btn-default" data-toggle="tooltip" title="Save"><i class="fa fa-check"></i></button>
+                        <button type="submit" class="btn btn-secondary" data-toggle="tooltip" title="Save"><i class="fa fa-check"></i></button>
                     </div>
                 </div>
             </div>
 
             @else
                 {!! Form::open(['route' => ['post.users.edit', $user->id], 'method' => 'post']) !!}
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <div class="card card-default">
+                    <div class="card-header">
                         <div class="row">
                             <div class="col-sm-6">
                                 <h4>Update User
@@ -24,14 +24,14 @@
                                 </h4>
                             </div>
                             <div class="col-sm-6 text-right">
-                                <button type="submit" class="btn btn-sm btn-default" data-toggle="tooltip" title="Save"><i class="fa fa-check"></i></button>
+                                <button type="submit" class="btn btn-sm btn-secondary" data-toggle="tooltip" title="Save"><i class="fa fa-check"></i></button>
                             </div>
                         </div>
                     </div>
 
                     @endif
 
-                    <div class="panel-body">
+                    <div class="card-body">
 
                         <div class="form-group{{ $errors->first('first_name', ' has-error') }}">
                             <label for="first_name">First name</label>
@@ -66,8 +66,8 @@
                         @include('auth::permissions.form', ['entity' => $user])
 
                     </div>
-                    <div class="panel-footer">
-                        <button type="submit" class="btn btn-default">Save</button>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-secondary">Save</button>
                     </div>
                 </div>
         {!! Form::close() !!}

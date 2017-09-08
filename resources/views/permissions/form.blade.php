@@ -1,19 +1,19 @@
 @if( ! empty($permissions))
     <h4>Permissions</h4>
 
-    <div class="panel-group accordion" id="accordion">
+    <div class="card-group accordion" id="accordion">
         @foreach($permissions as $groupName => $permissionsGroup)
-            <div class="panel panel-default">
-                <div class="panel-heading" group="tab" id="headingOne">
-                    <h4 class="panel-title">
+            <div class="card card-default">
+                <div class="card-header" group="tab" id="headingOne">
+                    <h4 class="card-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#{{ $groupName }}">
                             {{ ucfirst($groupName) }}
                         </a>
                         <i class="indicator fa fa-chevron-{{ $groupName == 'users' ? 'down':'right'}} pull-right"></i>
                     </h4>
                 </div>
-                <div id="{{ $groupName }}" class="panel-collapse collapse{{ $groupName == 'users' ? ' in':''}}">
-                    <div class="panel-body">
+                <div id="{{ $groupName }}" class="card-collapse collapse{{ $groupName == 'users' ? ' in':''}}">
+                    <div class="card-body">
                         <table class="table table-nohead">
 
                             <tbody>
@@ -53,7 +53,7 @@
             var toggleChevron = function (e) {
 
                 $(e.target)
-                    .prev('.panel-heading')
+                    .prev('.card-header')
                     .find("i.indicator")
                     .toggleClass('fa-chevron-down fa-chevron-right');
             };
