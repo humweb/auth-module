@@ -123,9 +123,7 @@ class PasswordController extends Controller
 
         $response = $this->passwords->reset($credentials, function ($user, $password) {
             $user->password = bcrypt($password);
-
             $user->save();
-
             $this->auth->login($user);
         });
 
@@ -134,7 +132,10 @@ class PasswordController extends Controller
                 return redirect($this->redirectPath());
 
             default:
-                return redirect()->back()->withInput($request->only('email'))->withErrors(['email' => trans($response)]);
+                return redirect()
+                    ->back()
+                    ->withInput($request->only('email'))
+                    ->withErrors(['email' => trans($response)]);
         }
     }
 

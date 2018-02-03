@@ -73,12 +73,12 @@ class AuthServiceProvider extends ModuleBaseProvider
                 [
                     'label' => 'Groups',
                     'url'   => route('get.groups'),
-                    'icon'  => '<i class="fa fa-users" ></i>',
+                    'icon'  => '<i class="fa fa-fw fa-users"></i>',
                 ],
                 [
                     'label' => 'Users',
                     'url'   => route('get.users'),
-                    'icon'  => '<i class="fa fa-user" ></i>',
+                    'icon'  => '<i class="fa fa-fw fa-user"></i>',
                 ],
             ],
         ];

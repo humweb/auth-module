@@ -53,7 +53,8 @@ class Permission
 
                 if ($this->isTrue($status) && ! in_array($perm, $this->allocatedPermissions)) {
                     $this->allocatedPermissions[] = $perm;
-                } elseif ($override && ! $this->isTrue($status) && ($this->isTrue($index = array_search($perm, $this->allocatedPermissions)))) {
+                } elseif ($override && ! $this->isTrue($status) && ($this->isTrue($index = array_search($perm,
+                        $this->allocatedPermissions)))) {
                     unset($this->allocatedPermissions[$index]);
                 }
             }

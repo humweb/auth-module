@@ -106,7 +106,8 @@ class UsersController extends AdminController
         $input = $request->except(['_token', 'groups']);
 
         $input['password']    = Hash::make($input['password']);
-        $input['permissions'] = isset($input['permissions']) && is_array($input['permissions']) ? $input['permissions'] : [];
+        $input['permissions'] = isset($input['permissions']) && is_array($input['permissions']) ? $input['permissions']
+            : [];
         $user                 = User::create($input);
 
         // Ensure we don't save blank password
