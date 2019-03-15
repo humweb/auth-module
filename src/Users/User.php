@@ -6,6 +6,7 @@ use Humweb\Auth\Contracts\Permissible as PemissibleContract;
 use Humweb\Auth\Groups\Contracts\Groupable as GroupableContract;
 use Humweb\Auth\Groups\Groupable;
 use Humweb\Auth\Permissions\Permissible;
+use Humweb\Teams\Traits\TeamUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -16,7 +17,7 @@ use Illuminate\Notifications\Notifiable;
  */
 class User extends Authenticatable implements PemissibleContract, GroupableContract
 {
-    use Notifiable, Permissible, Groupable;
+    use Notifiable, Permissible, Groupable, TeamUserTrait;
 
     /**
      * The database table used by the model.
@@ -40,11 +41,7 @@ class User extends Authenticatable implements PemissibleContract, GroupableContr
     protected $hidden = ['password', 'remember_token'];
 
     protected $casts = [
-        'permissions' => 'array'
-    ];
-
-    protected $attributes = [
-        'permissions' => []
+        'permissions' => 'json'
     ];
 
 
@@ -52,4 +49,5 @@ class User extends Authenticatable implements PemissibleContract, GroupableContr
     {
         return $this->first_name.' '.$this->last_name;
     }
+
 }

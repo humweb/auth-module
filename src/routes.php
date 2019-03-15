@@ -3,21 +3,21 @@
 /**
  * AUTH.
  */
-//Route::get('logout', ['as' => 'get.logout', 'uses' => 'AuthController@getLogout']);
-//Route::get('login', ['as' => 'get.login', 'uses' => 'AuthController@getLogin']);
-//Route::post('login', ['as' => 'post.login', 'uses' => 'AuthController@postLogin']);
-//Route::get('register', ['as' => 'get.register', 'uses' => 'AuthController@getRegister']);
-//Route::post('register', ['as' => 'post.register', 'uses' => 'AuthController@postRegister']);
+Route::get('logout', ['as' => 'get.logout', 'uses' => 'AuthController@getLogout']);
+Route::get('login', ['as' => 'get.login', 'uses' => 'AuthController@getLogin']);
+Route::post('login', ['as' => 'post.login', 'uses' => 'AuthController@postLogin']);
+Route::get('register', ['as' => 'get.register', 'uses' => 'AuthController@getRegister']);
+Route::post('register', ['as' => 'post.register', 'uses' => 'AuthController@postRegister']);
 
 /*
  * PASSWORD RESET
  */
-//Route::group(['prefix' => 'password'], function () {
-//    Route::get('email', ['as' => 'get.password.email', 'uses' => 'PasswordController@getEmail']);
-//    Route::post('email', ['as' => 'post.password.email', 'uses' => 'PasswordController@postEmail']);
-//    Route::get('reset', ['as' => 'get.password.reset', 'uses' => 'PasswordController@getReset']);
-//    Route::post('reset', ['as' => 'post.password.reset', 'uses' => 'PasswordController@postReset']);
-//});
+Route::group(['prefix' => 'password'], function () {
+    Route::get('email', ['as' => 'get.password.email', 'uses' => 'PasswordController@getEmail']);
+    Route::post('email', ['as' => 'post.password.email', 'uses' => 'PasswordController@postEmail']);
+    Route::get('reset', ['as' => 'get.password.reset', 'uses' => 'PasswordController@getReset']);
+    Route::post('reset', ['as' => 'post.password.reset', 'uses' => 'PasswordController@postReset']);
+});
 
 /*
  * ADMIN - GROUPS

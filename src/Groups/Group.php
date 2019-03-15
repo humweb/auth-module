@@ -27,6 +27,10 @@ class Group extends Model implements PermissibleContract
      */
     protected $fillable = ['name', 'slug', 'permissions'];
 
+    protected $casts = [
+        'permissions' => 'array'
+    ];
+
 
     /**
      * Delete the group.

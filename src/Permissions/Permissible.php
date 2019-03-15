@@ -88,6 +88,6 @@ trait Permissible
             }
         }
 
-        $this->attributes['permissions'] = ( ! empty($permissions)) ? json_encode($permissions) : '';
+        $this->attributes['permissions'] = json_encode(( ! empty($permissions)) ? $permissions : []);
     }
 }

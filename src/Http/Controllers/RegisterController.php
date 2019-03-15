@@ -1,6 +1,6 @@
 <?php
 
-namespace Humweb\Core\Http\Controllers\Auth;
+namespace Humweb\Auth\Http\Controllers;
 
 use App\User;
 use Humweb\Core\Http\Controllers\Controller;
@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
 
     /**
@@ -72,5 +72,17 @@ class RegisterController extends Controller
             'email'    => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * The user has been registered.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  mixed  $user
+     * @return mixed
+     */
+    protected function registered(Request $request, $user)
+    {
+        //
     }
 }

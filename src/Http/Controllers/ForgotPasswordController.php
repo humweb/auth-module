@@ -1,6 +1,6 @@
 <?php
 
-namespace Humweb\Core\Http\Controllers\Auth;
+namespace Humweb\Auth\Http\Controllers;
 
 use Humweb\Core\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;

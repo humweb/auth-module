@@ -6,6 +6,7 @@ use Humweb\Auth\Groups\Group;
 use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\GroupSaveRequest;
 use Humweb\Core\Http\Controllers\AdminController;
+use Illuminate\Http\Request;
 
 class GroupsController extends AdminController
 {
@@ -46,7 +47,7 @@ class GroupsController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $this->crumb('Index');
         $groups = $this->groups->paginate();

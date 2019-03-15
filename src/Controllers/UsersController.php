@@ -7,6 +7,7 @@ use Humweb\Auth\Permissions\PermissionsPresenter;
 use Humweb\Auth\Requests\UserSaveRequest;
 use Humweb\Auth\Users\User;
 use Humweb\Core\Http\Controllers\AdminController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends AdminController
@@ -51,7 +52,7 @@ class UsersController extends AdminController
      *
      * @return \Illuminate\View\View
      */
-    public function getIndex()
+    public function getIndex(Request $request)
     {
         $this->crumb('Index');
         $users = $this->users->paginate();
