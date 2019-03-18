@@ -23,6 +23,7 @@ class AuthController extends Controller
      */
     protected $registrar;
 
+    protected $layout = 'layouts.login';
 
     /**
      * Create a new authentication controller instance.
@@ -32,6 +33,7 @@ class AuthController extends Controller
      */
     public function __construct(Guard $auth)
     {
+        parent::__construct();
         $this->auth = $auth;
 
         $this->middleware('guest', ['except' => 'getLogout']);
