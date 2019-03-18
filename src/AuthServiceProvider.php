@@ -59,7 +59,7 @@ class AuthServiceProvider extends ModuleBaseProvider
      */
     public function boot()
     {
-        $this->app['modules']['auth'] = $this;
+        $this->app['modules']->put('auth', $this);
         $this->loadMigrations();
         $this->loadViews();
         $this->publishViews();
