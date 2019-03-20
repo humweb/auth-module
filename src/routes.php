@@ -6,8 +6,8 @@
 Route::get('logout', ['as' => 'get.logout', 'uses' => 'AuthController@getLogout']);
 Route::get('login', ['as' => 'get.login', 'uses' => 'AuthController@getLogin']);
 Route::post('login', ['as' => 'post.login', 'uses' => 'AuthController@postLogin']);
-Route::get('register', ['as' => 'get.register', 'uses' => 'AuthController@getRegister']);
-Route::post('register', ['as' => 'post.register', 'uses' => 'AuthController@postRegister']);
+Route::get('register', ['as' => 'get.register', 'uses' => 'RegisterController@showRegistrationForm']);
+Route::post('register', ['as' => 'post.register', 'uses' => 'RegisterController@register']);
 
 /*
  * PASSWORD RESET

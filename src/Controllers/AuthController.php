@@ -41,38 +41,6 @@ class AuthController extends Controller
 
 
     /**
-     * Show the application registration form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getRegister()
-    {
-        return $this->setContent('auth::register');
-    }
-
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function postRegister(Request $request)
-    {
-        $validator = $this->registrar->validator($request->all());
-
-        if ($validator->fails()) {
-            $this->throwValidationException($request, $validator);
-        }
-
-        $this->auth->login($this->registrar->create($request->all()));
-
-        return redirect($this->redirectPath());
-    }
-
-
-    /**
      * Get the post register / login redirect path.
      *
      * @return string
